@@ -1,7 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
-const schema = require('./schema/schema');
+const schema = require('../schema/schema');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
@@ -22,7 +22,11 @@ app.use('/graphql', graphqlHTTP({
     graphiql: true
 }));
 
-const port = process.env.PORT || 4000; // Use an environment variable for port or default to 4000
-app.listen(port, () => {
-     console.log(`Listening on port ${port}`);
-});
+module.exports = app;
+
+const port = process.env.PORT || 4000; // Default to port 4000
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
+  });
+}
