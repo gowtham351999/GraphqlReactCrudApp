@@ -24,9 +24,9 @@ app.use('/graphql', graphqlHTTP({
 
 module.exports = app;
 
-const port = process.env.PORT || 4000; // Default to port 4000
-if (require.main === module) {
-  app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
-  });
-}
+// const port = process.env.PORT || 4000; // Default to port 4000
+// if (require.main === module) {
+//   app.listen(port, () => {
+//     console.log(`Listening on port ${port}`);
+//   });
+// }
