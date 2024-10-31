@@ -7,7 +7,7 @@ const cors = require('cors');
 
 const app = express();
 
-// Using an environment variable for the URI
+// Using an environment variable for the URI with mongoDb
 const uri = process.env.MONGODB_URI;
 
 app.use(cors());
