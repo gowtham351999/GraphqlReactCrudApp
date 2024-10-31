@@ -2,9 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "main": "api/app.js",
-  "engines": {
-    "node": "18.17.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node api/app.js",
