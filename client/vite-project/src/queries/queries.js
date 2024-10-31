@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// graphQl queries
 const ADD_AUTHOR = gql`
   mutation AddAuthor(
     $name: String!
