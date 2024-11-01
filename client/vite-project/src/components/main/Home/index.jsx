@@ -1,16 +1,19 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { GET_BOOK, GET_BOOK_LIST } from "../../../queries/queries";
+import { DELETE_BOOK, GET_BOOK, GET_BOOK_LIST } from "../../../queries/queries";
 import FlatList from "../../common/FlatList";
+import { useState } from "react";
 
 function Home() {
+  const [updateBookId, setUpdateBookId] = useState(null);
+
   const [searchParams] = useSearchParams();
 
   const location = useLocation();
 
   const navigate = useNavigate();
 
-  const { id = '' } = location.state || {};
+  const { id = "" } = location.state || {};
 
   const isView = searchParams.get("type") === "View";
 
@@ -22,10 +25,12 @@ function Home() {
     delete idQuery.variables;
   }
 
-  const { data, loading } = useQuery(
+  const { data, loading, refetch } = useQuery(
     isView ? GET_BOOK : GET_BOOK_LIST,
     idQuery
   );
+
+  const [deleteBook, { loading: deleteLoading }] = useMutation(DELETE_BOOK);
 
   const { books, book } = data || [];
 
@@ -33,6 +38,16 @@ function Home() {
     navigate(`/book-list?type=${type}&name=${name.split(" ").join("-")}`, {
       state: { id: id },
     });
+  };
+
+  const deleteBookHandler = async (bookId) => {
+    setUpdateBookId(bookId);
+    const { data } = await deleteBook({
+      variables: { id: bookId },
+    });
+    if (data) {
+      refetch();
+    }
   };
 
   const renderBookList = ({ item }) => {
@@ -53,12 +68,25 @@ function Home() {
           className="text-light"
           onClick={() => {
             navigate(`/update-book/${id}`, {
-              state: { item, type: 'book' },
+              state: { item, type: "book" },
             });
           }}
         >
           &#9935;
         </span>
+        {deleteLoading && id === updateBookId ? (
+          <div className="spinner-border text-danger ms-3" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        ) : (
+          <span
+            role="button"
+            className="text-light ps-2"
+            onClick={() => deleteBookHandler(id)}
+          >
+            &#9940;
+          </span>
+        )}
       </div>
     );
   };

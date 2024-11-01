@@ -160,6 +160,23 @@ const Mutation = new GraphQLObjectType({
         return await Book.findByIdAndUpdate(id, item, { new: true });
       },
     },
+    deleteBook: {
+      type: BookType,
+      args: {
+        id: { type: new GraphQLNonNull(GraphQLString) },
+      },
+      resolve: async (_, { id }) => {
+        try {
+          const deletedBook = await Book.findByIdAndDelete(id);
+          if (!deletedBook) {
+            return;
+          }
+          return deletedBook;
+        } catch (error) {
+          throw new Error("Error deleting book: " + error.message);
+        }
+      },
+    },
   },
 });
 

@@ -134,12 +134,29 @@ const UPDATE_BOOK = gql`
   }
 `;
 
+const DELETE_BOOK = gql`
+  mutation DeleteBook(
+    $id: String!
+  ) {
+    deleteBook(
+      id: $id
+    ) {
+      id
+      name
+      genre
+      filmAdaption
+      authorId
+    }
+  }
+`;
+
 export {
   ADD_AUTHOR,
   UPDATE_AUTHOR,
   GET_AUTHOR_LIST,
   ADD_BOOK,
   UPDATE_BOOK,
+  DELETE_BOOK,
   GET_BOOK_LIST,
   GET_BOOK,
 };

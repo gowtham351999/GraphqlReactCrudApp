@@ -57,18 +57,16 @@ function AddBook({ bookObj = {}, isBook = false }) {
     const formData = new FormData(event.target);
     const bookPayload = Object.fromEntries(formData);
     try {
-      if (isBook) {
-        const { data } = isBook
-          ? await updateBook({
-              variables: { id: bookId, ...bookPayload },
-            })
-          : await addBook({
-              variables: bookPayload,
-            });
-        if (data && bookFormRef.current) {
-          bookFormRef.current.reset();
-          navigate("/book-list");
-        }
+      const { data } = isBook
+        ? await updateBook({
+            variables: { id: bookId, ...bookPayload },
+          })
+        : await addBook({
+            variables: bookPayload,
+          });
+      if (data && bookFormRef.current) {
+        bookFormRef.current.reset();
+        navigate("/book-list");
       }
     } catch (err) {
       console.log("err", err);
