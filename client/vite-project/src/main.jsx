@@ -24,7 +24,7 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   }
 });
 
-//conditional server url changes
+//conditional server url change
 const client = new ApolloClient({
   link: errorLink.concat(
     new HttpLink({ uri: GRAPHQL_URL })
