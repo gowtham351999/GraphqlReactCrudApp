@@ -41,7 +41,7 @@ function AddList() {
           className={`${styles.listContainer} d-flex justify-content-around bg-warning`}
         >
           {renderPill("Add Author", "author", type === "book")}
-          {renderPill("Add Book", "book")}
+          {renderPill(`${type === "book" ? "Update" : "Add"} Book`, "book")}
         </div>
         <div className="p-5 bg-success mt-2">
           {activePill === "author" && type !== "book" ? (

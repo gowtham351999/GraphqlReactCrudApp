@@ -108,7 +108,7 @@ function AddBook({ bookObj = {}, isBook = false }) {
             type="submit"
             className="d-flex justify-content-center align-items-center btn btn-warning text-light mt-3 p-2 w-100"
           >
-            Submit{" "}
+            {isBook ? "Update" : "Submit"}{" "}
             <div
               className={`spinner-border text-danger ms-3 ${
                 addLoading || updateLoading ? "d-block" : "d-none"
