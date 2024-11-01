@@ -3,6 +3,9 @@
 .listContainer{
     width: 100%;
     min-width: 400px;
+    @media screen and (max-width: 768px){
+        min-width: auto;
+    }
 }
 .tabBtn{
     border-radius: 0px;

@@ -36,9 +36,9 @@ function AddList() {
 
   return (
     <div className="row">
-      <div className="col-12 bg-warning p-5">
+      <div className="col-12 p-5">
         <div
-          className={`${styles.listContainer} d-flex justify-content-around bg-warning`}
+          className={`${styles.listContainer} d-flex justify-content-around`}
         >
           {renderPill("Add Author", "author", type === "book")}
           {renderPill(`${type === "book" ? "Update" : "Add"} Book`, "book")}
